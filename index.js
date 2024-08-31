@@ -7,6 +7,19 @@ function showTemperature(response) {
 
   let currentCityElement = document.querySelector("#current-city");
   currentCityElement.innerHTML = `${city}`;
+
+  let currentDateELement = document.querySelector("#current-date");
+  let currentDate = new Date(response.data.time * 1000);
+  currentDateELement.innerHTML = formatDate(currentDate);
+
+  let descriptionElement = document.querySelector("#description");
+  descriptionElement.innerHTML = response.data.condition.description;
+
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+
+  let windSpeedElement = document.querySelector("#wind-speed");
+  windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
 }
 
 function search(event) {
@@ -48,11 +61,6 @@ function formatDate(date) {
   let formattedDay = days[day];
   return `${formattedDay} ${hours}:${minutes}`;
 }
-
-let currentDateELement = document.querySelector("#current-date");
-let currentDate = new Date();
-
-currentDateELement.innerHTML = formatDate(currentDate);
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
